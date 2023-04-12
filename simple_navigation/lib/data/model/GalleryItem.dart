@@ -3,5 +3,6 @@ class GalleryItem {
   final String description;
   final String imageUrl;
 
-  const GalleryItem({this.name, this.description, this.imageUrl});
+  const GalleryItem(
+      {required this.name, required this.description, required this.imageUrl});
 }

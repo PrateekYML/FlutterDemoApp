@@ -48,7 +48,7 @@ flutter:
     - asset/images/img_5.jfif
     - asset/images/img_6.jpg
     - asset/images/img_7.webp
-    - asset/images/img_9.webp
+    - asset/images/img_9.jfif
 
   # To add assets to your application, add an assets section, like this:
   # assets:

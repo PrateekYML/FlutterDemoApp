@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import '/data/model/GalleryItem.dart';
 
 class HomeScreen extends StatelessWidget {
-  const HomeScreen({Key key}) : super(key: key);
+  const HomeScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +23,7 @@ class HomeScreen extends StatelessWidget {
 }
 
 class Gallery extends StatelessWidget {
-  Gallery({Key key}) : super(key: key);
+  Gallery({Key? key}) : super(key: key);
 
   final List<String> imgUrls = [
     "asset/images/img_1.jpg",
@@ -33,7 +33,7 @@ class Gallery extends StatelessWidget {
     "asset/images/img_5.jfif",
     "asset/images/img_6.jpg",
     "asset/images/img_7.webp",
-    "asset/images/img_9.webp",
+    "asset/images/img_9.jfif",
   ];
 
   final List<String> descriptions = [
@@ -84,7 +84,7 @@ class Gallery extends StatelessWidget {
 class GalleryItemInfo extends StatelessWidget {
   final GalleryItem galleryItem;
 
-  const GalleryItemInfo({this.galleryItem});
+  const GalleryItemInfo({required this.galleryItem});
 
   @override
   Widget build(BuildContext context) {
