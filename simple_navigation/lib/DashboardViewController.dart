@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class Page2 extends StatelessWidget {
+class DashboardViewController extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Scaffold(
     backgroundColor: Color.fromARGB(255, 7, 123, 255),
@@ -20,7 +20,7 @@ class Page2 extends StatelessWidget {
     body: Container(
       child: Center(
         child: Text(
-            'Second Page',
+            'Coming soon..',
             style: TextStyle(fontSize: 35.0, fontWeight: FontWeight.bold, color: Colors.white ),
         ),
       )
