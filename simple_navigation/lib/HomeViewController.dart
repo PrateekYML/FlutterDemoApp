@@ -1,7 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:simple_navigation/DashboardViewController.dart';
 
-class HomeViewController extends StatelessWidget {
+
+class HomeViewController extends StatefulWidget {
+  const HomeViewController({Key? key}) : super(key: key);
+  @override
+  State<HomeViewController> createState() =>  HomeViewControllerState();
+}
+
+class HomeViewControllerState extends State<HomeViewController>  {
   @override
   Widget build(BuildContext context) => Scaffold(
      appBar: AppBar(
@@ -87,8 +94,8 @@ class HomeViewController extends StatelessWidget {
                 const Text('Does not have account?'),
                 TextButton(
                   child: const Text(
-                    'Sign in',
-                    style: TextStyle(fontSize: 20),
+                    'Sign Up',
+                    style: TextStyle(fontSize: 16),
                   ),
                   onPressed: () {
                     //signup screen
