@@ -75,7 +75,7 @@ class HomeViewControllerState extends State<HomeViewController>  {
               onPressed: () {
                 //forgot password screen
               },
-              child: const Text('Forgot Password',),
+              child: const Text('Forgot Password?',),
             ),
             Container(
                 height: 50,
@@ -98,7 +98,18 @@ class HomeViewControllerState extends State<HomeViewController>  {
                     style: TextStyle(fontSize: 16),
                   ),
                   onPressed: () {
-                    //signup screen
+                    
+            final snackBar = SnackBar(
+              content: const Text('Hey Snacky !!!'),
+            action: SnackBarAction(
+              label: 'Undo',
+              onPressed: () {
+                // Some code to undo the change.
+              },
+            ),
+          );
+                    ScaffoldMessenger.of(context).showSnackBar(snackBar);
+
                   },
                 )
               ],
