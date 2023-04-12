@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:simple_navigation/HomeScreen.dart';
 import 'package:simple_navigation/HomeViewController.dart';
 
 void main() => runApp(MyApp());
@@ -14,7 +15,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: HomeViewController()
+      home: HomeScreen()
     );
   }
 }
