@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:simple_navigation/DashboardViewController.dart';
+import 'package:simple_navigation/SignupViewController.dart';
 import 'package:simple_navigation/HomeScreen.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
@@ -20,7 +20,7 @@ class HomeViewControllerState extends State<HomeViewController>  {
     floatingActionButton: FloatingActionButton(
       onPressed: (){
         Navigator.push(context, new MaterialPageRoute(
-          builder: (context) => DashboardViewController()
+          builder: (context) =>     SignupViewController()
         ));
       },
       tooltip:'Next Page',
