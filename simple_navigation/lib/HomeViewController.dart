@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:simple_navigation/DashboardViewController.dart';
-
+import 'package:simple_navigation/HomeScreen.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class HomeViewController extends StatefulWidget {
   const HomeViewController({Key? key}) : super(key: key);
@@ -11,10 +12,11 @@ class HomeViewController extends StatefulWidget {
 class HomeViewControllerState extends State<HomeViewController>  {
   @override
   Widget build(BuildContext context) => Scaffold(
+    
      appBar: AppBar(
         title: Text('Flutter Demo Navigation'),
       ),
-    backgroundColor: Color.fromARGB(255, 243, 212, 33),
+    backgroundColor: Color.fromARGB(255, 246, 246, 241),
     floatingActionButton: FloatingActionButton(
       onPressed: (){
         Navigator.push(context, new MaterialPageRoute(
@@ -31,6 +33,8 @@ class HomeViewControllerState extends State<HomeViewController>  {
       backgroundColor: Colors.white,
     ),
     body: Container(
+      constraints: BoxConstraints.expand(),
+
       alignment: Alignment.center,
       padding: EdgeInsets.all(10),
       child: ListView(
@@ -39,7 +43,7 @@ class HomeViewControllerState extends State<HomeViewController>  {
                 alignment: Alignment.center,
                 padding: const EdgeInsets.all(10),
                 child: const Text(
-                  'First Republic Bank',
+                  'Y Media Labs',
                   style: TextStyle(
                       color: Color.fromARGB(255, 1, 10, 18),
                       fontWeight: FontWeight.w500,
@@ -74,6 +78,8 @@ class HomeViewControllerState extends State<HomeViewController>  {
             TextButton(
               onPressed: () {
                 //forgot password screen
+                 showAlertDialog(context);  
+                Fluttertoast.showToast(msg:"Forget password clicked !!");
               },
               child: const Text('Forgot Password?',),
             ),
@@ -84,7 +90,7 @@ class HomeViewControllerState extends State<HomeViewController>  {
                   child: const Text('Login'),
                   onPressed: () {
          Navigator.push(context, new MaterialPageRoute(
-          builder: (context) => DashboardViewController()
+          builder: (context) => HomeScreen()
         ));
                   },
                 )
@@ -121,3 +127,29 @@ class HomeViewControllerState extends State<HomeViewController>  {
   );
 }
 
+showAlertDialog(BuildContext context) {  
+  // Create button  
+  Widget okButton = ElevatedButton(  
+    child: Text("OK"),  
+    onPressed: () {  
+      Navigator.of(context).pop();  
+    },  
+  );  
+  
+  // Create AlertDialog  
+  AlertDialog alert = AlertDialog(  
+    title: Text("Forget Password"),  
+    content: Text("Please reset your password !!"),  
+    actions: [  
+      okButton,  
+    ],  
+  );  
+  
+  // show the dialog  
+  showDialog(  
+    context: context,  
+    builder: (BuildContext context) {  
+      return alert;  
+    },  
+  );  
+}  

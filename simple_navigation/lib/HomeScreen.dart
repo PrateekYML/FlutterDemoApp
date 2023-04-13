@@ -10,7 +10,10 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Home Screen"),
+        title: Text("Photo Gallery"),
+        leading: BackButton(
+    onPressed: () => Navigator.of(context).pop(),
+  ),
       ),
       drawer: Drawer(
         child: ListView(
@@ -89,6 +92,12 @@ class GalleryItemInfo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: Text("Details"),
+        leading: BackButton(
+    onPressed: () => Navigator.of(context).pop(),
+  ),
+      ),
       body: Hero(
           tag: galleryItem.imageUrl,
           child: Center(
