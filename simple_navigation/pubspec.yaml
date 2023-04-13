@@ -25,6 +25,7 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^0.1.2
   fluttertoast: ^8.2.1
+  flutter_svg: ^2.0.5
 
 dev_dependencies:
   flutter_test:
@@ -51,6 +52,16 @@ flutter:
     - asset/images/img_6.jpg
     - asset/images/img_7.webp
     - asset/images/img_9.jfif
+    - asset/images/ic_image.svg
+    - asset/images/ic_friends.svg
+    - asset/images/avatar/ic_avatar_1.jpg
+    - asset/images/avatar/ic_avatar_2.jpg
+    - asset/images/avatar/ic_avatar_3.jpg
+    - asset/images/avatar/ic_avatar_4.jpg
+    - asset/images/avatar/ic_avatar_5.jpg
+    - asset/images/avatar/ic_avatar_6.jpg
+    - asset/images/avatar/ic_avatar_7.jpg
+    - asset/images/avatar/ic_avatar_8.jpg
 
   # To add assets to your application, add an assets section, like this:
   # assets:

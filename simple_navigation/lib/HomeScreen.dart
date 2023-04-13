@@ -1,113 +1,112 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
-import '/data/model/GalleryItem.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:simple_navigation/FriendList.dart';
+import 'package:simple_navigation/UserProfile.dart';
+import 'Gallery.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
 
   @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  int _selectedIndex = 0;
+  Widget _activePage = UserProfile(
+      firstName: "Sujay",
+      lastName: "Sh",
+      gender: "Male",
+      dob: "18-07-1999",
+      email: "sujay.shenoy@ymedialabs.com");
+  Widget _appBarTitle = Text("Profile");
+
+  void _onNavChange(int index) {
+    setState(() {
+      _selectedIndex = index;
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
+    switch (_selectedIndex) {
+      case 0:
+        {
+          _activePage = UserProfile(
+              firstName: "Sujay",
+              lastName: "Sh",
+              gender: "Male",
+              dob: "18-07-1999",
+              email: "sujay.shenoy@ymedialabs.com");
+          _appBarTitle = Text("Profile");
+          break;
+        }
+      case 1:
+        {
+          _activePage = Gallery();
+          _appBarTitle = Text("Gallery");
+          break;
+        }
+      case 2:
+        {
+          _activePage = FriendList();
+          _appBarTitle = Text("Friends");
+          break;
+        }
+    }
+
     return Scaffold(
       appBar: AppBar(
-        title: Text("Photo Gallery"),
+        title: _appBarTitle,
         leading: BackButton(
-    onPressed: () => Navigator.of(context).pop(),
-  ),
+          onPressed: () => Navigator.of(context).pop(),
+        ),
       ),
       drawer: Drawer(
         child: ListView(
           children: [DrawerHeader(child: Text("Nav Drawer"))],
         ),
       ),
-      body: Gallery(),
-    );
-  }
-}
-
-class Gallery extends StatelessWidget {
-  Gallery({Key? key}) : super(key: key);
-
-  final List<String> imgUrls = [
-    "asset/images/img_1.jpg",
-    "asset/images/img_2.jfif",
-    "asset/images/img_3.webp",
-    "asset/images/img_4.jfif",
-    "asset/images/img_5.jfif",
-    "asset/images/img_6.jpg",
-    "asset/images/img_7.webp",
-    "asset/images/img_9.jfif",
-  ];
-
-  final List<String> descriptions = [
-    "First Desc", "Second desc", "Third desc", "Fourth desc", "Fifth desc",
-    "Sixth desc", "Seventh desc", "Eighth desc"
-  ];
-
-  final List<String> imgNames = [
-    "First", "Second", "Third", "Fourth", "Fifth",
-    "Sixth", "Seventh", "Eighth"
-  ];
-
-  final List galleryItems = [];
-  final int numberOfTiles = 21;
-
-  @override
-  Widget build(BuildContext context) {
-    for(int i = 0; i<numberOfTiles; i++) {
-      Random random = new Random();
-      int chosenIndex = random.nextInt(7);
-      galleryItems.add(GalleryItem(
-        name: imgNames[chosenIndex],
-        description: descriptions[chosenIndex],
-        imageUrl: imgUrls[chosenIndex]
-      ));
-    }
-
-    return GridView.builder(
-        padding: EdgeInsets.fromLTRB(8, 16, 8, 0),
-        itemCount: galleryItems.length,
-        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 3, mainAxisSpacing: 4, crossAxisSpacing: 4),
-        itemBuilder: (context, index) {
-          GalleryItem item = galleryItems[index];
-
-          return GestureDetector(
-            onTap: () {
-              Navigator.push(context, new MaterialPageRoute(
-                  builder: (context) => GalleryItemInfo(galleryItem: item)
-              ));
-            },
-            child: Image.asset(item.imageUrl,
-              width: 50, height: 50, fit: BoxFit.cover));
-        });
-  }
-}
-
-class GalleryItemInfo extends StatelessWidget {
-  final GalleryItem galleryItem;
-
-  const GalleryItemInfo({required this.galleryItem});
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text("Details"),
-        leading: BackButton(
-    onPressed: () => Navigator.of(context).pop(),
-  ),
+      body: _activePage,
+      bottomNavigationBar: BottomNavigationBar(
+        items: [
+          BottomNavigationBarItem(
+              icon: Icon(Icons.account_circle_sharp), label: 'Profile'),
+          BottomNavigationBarItem(
+              icon: SvgPicture.asset(
+                "asset/images/ic_image.svg",
+                width: 20,
+                height: 20,
+                colorFilter: ColorFilter.mode(Colors.black45, BlendMode.srcIn),
+              ),
+              activeIcon: SvgPicture.asset(
+                "asset/images/ic_image.svg",
+                width: 20,
+                height: 20,
+                colorFilter:
+                    ColorFilter.mode(Colors.indigoAccent, BlendMode.srcIn),
+              ),
+              label: 'Gallery'),
+          BottomNavigationBarItem(
+              icon: SvgPicture.asset(
+                "asset/images/ic_friends.svg",
+                width: 20,
+                height: 20,
+                colorFilter: ColorFilter.mode(Colors.black45, BlendMode.srcIn),
+              ),
+              activeIcon: SvgPicture.asset(
+                "asset/images/ic_friends.svg",
+                width: 20,
+                height: 20,
+                colorFilter:
+                    ColorFilter.mode(Colors.indigoAccent, BlendMode.srcIn),
+              ),
+              label: 'Friends'),
+        ],
+        selectedItemColor: Colors.indigoAccent,
+        currentIndex: _selectedIndex,
+        onTap: _onNavChange,
       ),
-      body: Hero(
-          tag: galleryItem.imageUrl,
-          child: Center(
-            child: Image.asset(
-              galleryItem.imageUrl,
-              width: 250,
-              height: 250,
-              fit: BoxFit.contain,
-            ),
-          )),
     );
   }
 }
