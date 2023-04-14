@@ -90,6 +90,7 @@ class _HomeScreenState extends State<HomeScreen> {
               title: Text("Profile"),
               selected: _selectedIndex == 0,
               onTap: () {
+                Navigator.pop(context);
                 _onNavChange(0);
               },
             ),
@@ -115,7 +116,7 @@ class _HomeScreenState extends State<HomeScreen> {
               title: Text("Gallery"),
               selected: _selectedIndex == 1,
               onTap: () {
-                onTap:
+                Navigator.pop(context);
                 _onNavChange(1);
               },
             ),
@@ -141,7 +142,7 @@ class _HomeScreenState extends State<HomeScreen> {
               title: Text("Friends"),
               selected: _selectedIndex == 2,
               onTap: () {
-                onTap:
+                Navigator.pop(context);
                 _onNavChange(2);
               },
             )

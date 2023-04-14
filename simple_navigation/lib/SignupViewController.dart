@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'HomeScreen.dart';
+
 class SignupViewController extends StatefulWidget {
   const SignupViewController({Key? key}) : super(key: key);
 
@@ -7,16 +9,11 @@ class SignupViewController extends StatefulWidget {
   State<SignupViewController> createState() => SignupViewControllerState();
 }
 
-int _selected = 0;
-
 class SignupViewControllerState extends State<SignupViewController> {
-  void onChanged(int value) {
-    setState(() {
-      _selected = value;
-    });
-
-    print('Value = $value');
-  }
+  String _firstName = "";
+  String _lastName = "";
+  String _email = "";
+  String _gender = "";
 
   @override
   Widget build(BuildContext context) => Scaffold(
@@ -71,26 +68,33 @@ class SignupViewControllerState extends State<SignupViewController> {
                       border: OutlineInputBorder(),
                       labelText: 'First Name',
                     ),
+                    onChanged: (val) {
+                      _firstName = val;
+                    },
                   ),
                 ),
                 Container(
                   padding: const EdgeInsets.fromLTRB(10, 10, 10, 0),
                   child: TextField(
-                    obscureText: true,
                     decoration: const InputDecoration(
                       border: OutlineInputBorder(),
                       labelText: 'Last Name',
                     ),
+                    onChanged: (val) {
+                      _lastName = val;
+                    },
                   ),
                 ),
                 Container(
                   padding: const EdgeInsets.fromLTRB(10, 10, 10, 0),
                   child: TextField(
-                    obscureText: true,
                     decoration: const InputDecoration(
                       border: OutlineInputBorder(),
                       labelText: 'Email',
                     ),
+                    onChanged: (val) {
+                      _email = val;
+                    },
                   ),
                 ),
                 Container(
@@ -115,27 +119,32 @@ class SignupViewControllerState extends State<SignupViewController> {
                   height: 50,
                   padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
                   child: Row(children: [
+                    const Text("Gender: "),
+                    Radio(
+                      value: "Male",
+                      groupValue: _gender,
+                      onChanged: (val) {
+                        setState(() {
+                          _gender = "Male";
+                        });
+                      },
+                    ),
                     const Text(
                       'Male',
                       style: TextStyle(fontSize: 17.0),
                     ),
                     Radio(
-                      value: 1,
-                      groupValue: _selected,
+                      value: "Female",
+                      groupValue: _gender,
                       onChanged: (val) {
-                        setState(() {});
+                        setState(() {
+                          _gender = "Female";
+                        });
                       },
                     ),
                     const Text(
                       'Female',
                       style: TextStyle(fontSize: 17.0),
-                    ),
-                    Radio(
-                      value: 2,
-                      groupValue: 2,
-                      onChanged: (val) {
-                        setState(() {});
-                      },
                     ),
                     // more widgets ...
                   ]),
@@ -145,7 +154,18 @@ class SignupViewControllerState extends State<SignupViewController> {
                     padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
                     child: ElevatedButton(
                       child: const Text('Submit'),
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.push(
+                            context,
+                            new MaterialPageRoute(
+                                builder: (context) => HomeScreen(
+                                  firstName: _firstName,
+                                  lastName: _lastName,
+                                  gender: _gender,
+                                  dob: "<DOB>",
+                                  email: _email,
+                                )));
+                      },
                     )),
               ],
             )),
