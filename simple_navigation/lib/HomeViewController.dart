@@ -104,11 +104,9 @@ class HomeViewControllerState extends State<HomeViewController>  {
                     style: TextStyle(fontSize: 16),
                   ),
                   onPressed: () {
-                       Navigator.push(context, new MaterialPageRoute(
-          builder: (context) =>     SignupViewController()
-        ));
+                    
             final snackBar = SnackBar(
-              content: const Text('Hey You are on Signup Page !!!'),
+              content: const Text('Hey Snacky !!!'),
             action: SnackBarAction(
               label: 'Undo',
               onPressed: () {
