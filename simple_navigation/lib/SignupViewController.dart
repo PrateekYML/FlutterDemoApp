@@ -78,6 +78,7 @@ class SignupViewControllerState extends State<SignupViewController> {
           Container(
             padding: const EdgeInsets.all(10),
             child: TextField(
+              obscureText: true,
               decoration: const InputDecoration(
                 border: OutlineInputBorder(),
                 labelText: 'Password',
@@ -87,6 +88,7 @@ class SignupViewControllerState extends State<SignupViewController> {
           Container(
             padding: const EdgeInsets.all(10),
             child: TextField(
+              obscureText: true,
               decoration: const InputDecoration(
                 border: OutlineInputBorder(),
                 labelText: 'Confirm Password',
