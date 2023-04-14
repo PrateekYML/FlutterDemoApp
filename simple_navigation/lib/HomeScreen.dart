@@ -5,21 +5,43 @@ import 'package:simple_navigation/UserProfile.dart';
 import 'Gallery.dart';
 
 class HomeScreen extends StatefulWidget {
-  const HomeScreen({Key? key}) : super(key: key);
+  final String firstName;
+  final String lastName;
+  final String gender;
+  final String dob;
+  final String email;
+
+  const HomeScreen(
+      {Key? key,
+      required this.firstName,
+      required this.lastName,
+      required this.gender,
+      required this.dob,
+      required this.email})
+      : super(key: key);
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  int _selectedIndex = 0;
-  Widget _activePage = UserProfile(
-      firstName: "Sujay",
-      lastName: "Sh",
-      gender: "Male",
-      dob: "18-07-1999",
-      email: "sujay.shenoy@ymedialabs.com");
-  Widget _appBarTitle = Text("Profile");
+  late int _selectedIndex;
+  late Widget _activePage;
+  late Widget _appBarTitle;
+
+  @override
+  void initState() {
+    _selectedIndex = 0;
+    _activePage = UserProfile(
+        firstName: widget.firstName,
+        lastName: widget.lastName,
+        gender: widget.gender,
+        dob: widget.dob,
+        email: widget.email);
+    _appBarTitle = Text("Profile");
+
+    super.initState();
+  }
 
   void _onNavChange(int index) {
     setState(() {
@@ -33,11 +55,11 @@ class _HomeScreenState extends State<HomeScreen> {
       case 0:
         {
           _activePage = UserProfile(
-              firstName: "Sujay",
-              lastName: "Sh",
-              gender: "Male",
-              dob: "18-07-1999",
-              email: "sujay.shenoy@ymedialabs.com");
+              firstName: widget.firstName,
+              lastName: widget.lastName,
+              gender: widget.gender,
+              dob: widget.dob,
+              email: widget.email);
           _appBarTitle = Text("Profile");
           break;
         }
@@ -58,13 +80,72 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       appBar: AppBar(
         title: _appBarTitle,
-        leading: BackButton(
-          onPressed: () => Navigator.of(context).pop(),
-        ),
       ),
       drawer: Drawer(
         child: ListView(
-          children: [DrawerHeader(child: Text("Nav Drawer"))],
+          children: [
+            DrawerHeader(child: Text("Nav Drawer")),
+            ListTile(
+              leading: Icon(Icons.account_circle_sharp),
+              title: Text("Profile"),
+              selected: _selectedIndex == 0,
+              onTap: () {
+                _onNavChange(0);
+              },
+            ),
+            ListTile(
+              leading: (() {
+                if (_selectedIndex == 1)
+                  return SvgPicture.asset(
+                    "asset/images/ic_image.svg",
+                    width: 20,
+                    height: 20,
+                    colorFilter:
+                        ColorFilter.mode(Colors.indigoAccent, BlendMode.srcIn),
+                  );
+                else
+                  return SvgPicture.asset(
+                    "asset/images/ic_image.svg",
+                    width: 20,
+                    height: 20,
+                    colorFilter:
+                        ColorFilter.mode(Colors.black45, BlendMode.srcIn),
+                  );
+              }()),
+              title: Text("Gallery"),
+              selected: _selectedIndex == 1,
+              onTap: () {
+                onTap:
+                _onNavChange(1);
+              },
+            ),
+            ListTile(
+              leading: (() {
+                if (_selectedIndex == 2)
+                  return SvgPicture.asset(
+                    "asset/images/ic_friends.svg",
+                    width: 20,
+                    height: 20,
+                    colorFilter:
+                        ColorFilter.mode(Colors.indigoAccent, BlendMode.srcIn),
+                  );
+                else
+                  return SvgPicture.asset(
+                    "asset/images/ic_friends.svg",
+                    width: 20,
+                    height: 20,
+                    colorFilter:
+                        ColorFilter.mode(Colors.black45, BlendMode.srcIn),
+                  );
+              }()),
+              title: Text("Friends"),
+              selected: _selectedIndex == 2,
+              onTap: () {
+                onTap:
+                _onNavChange(2);
+              },
+            )
+          ],
         ),
       ),
       body: _activePage,
